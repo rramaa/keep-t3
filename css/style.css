@@ -1,0 +1,113 @@
+@media (min-width:850px){
+	#categories{
+		width: 20%;
+		float: left;
+	}
+	#notes{
+		width :75%;
+		margin-left: 22%;
+		border-left:1px solid; 
+	}
+	#notes div[data-module="list-notes"] div[data-type="note"]{
+		width: 48%;
+	}
+	button[data-type="btn-category"]{
+		display: block;
+	}
+	input[type="text"]{
+		width:60%;
+	}
+}
+@media (max-width:849px){
+	#categories{
+		width: 100%;
+		float: none;
+	}
+	#notes{
+		width :100%;
+		margin-left: 0px;
+		border-top:1px solid; 
+	}
+	#notes div[data-module="list-notes"] div[data-type="note"]{
+		width: 100%;
+	}
+	button[data-type="btn-category"]{
+		display: inline-block;
+	}
+}
+#categories{
+	padding: 5px;
+}
+#notes{
+	padding: 5px;
+	display: table;
+}
+body{
+	font-family: Verdana;
+}
+#notes div{
+	
+}
+#notes div[data-module="add-notes"]{
+	margin-bottom: 2px;
+}
+#notes div[data-module="list-notes"] div[data-type="note"]{
+	display: table-cell;
+	box-sizing:border-box;
+	//width:48%;
+	float: left;
+	margin: 1%;
+	box-shadow: 1px 1px 5px black;
+	padding: 5px;
+}
+textarea{
+	resize:none;
+}
+input[type="text"],textarea{
+	border: none;
+	border-bottom:1px solid #D0D0FF;  
+}
+input[type="text"]:focus,textarea:focus{
+	border: none;
+	border-bottom:1px solid blue;
+	outline-width: 0;
+}
+span[data-type="note-content"]{
+	display: block;
+}
+textarea[data-type="note-editing"]{
+	display: none;
+}
+.editing textarea[data-type="note-editing"]{
+	display: block;
+	margin-bottom: 5px;
+	width: 99%;
+}
+.editing span[data-type="note-content"]{
+	display: none;
+}
+button{
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	margin:1px;
+}
+button:focus{
+	outline-width: 0;
+}
+div[data-type="note"] button{
+	width:23%;
+	background-color: #337AB7;
+	color: white;
+	border-radius: 5px;
+}
+div[data-type="note"] div{
+	width:24%;
+	display: inline-block;
+	padding: 0px;
+}
+div[data-type="note"] div button{
+	width:100%;
+	font-size: 10px;
+	//display: inline-block;
+}
