@@ -4,28 +4,25 @@ Box.Application.addModule('add-categories',function(context){
 		this.id=id;
 		this.name=name;
 	};
-	var moduleElement,categories,db;
+	var moduleElement,categories,db,utilities;
 	return {
 		init:function(){
 			moduleElement=context.getElement();
 			db=context.getService('db');
+			utilities=context.getService('utilities');
 			categories=db.getData('categories');
 			if(!categories){
-				console.log('No categories');
-				var temp=context.getService('initializeDb');
-				categories=temp.initializeCategories();
-				db.setData('categories',categories);
+				categories=db.initializeCategories();
 			}
 		},
 		addCategory:function(value){
 			if(value!=""){
 				categories.count++;
+				value=utilities.capitalizeFirstLetter(value);
 				var category=new Category(categories.count,value);
 				categories.data.push(category);
 				db.setData('categories',categories);
 				context.broadcast('categoryAdded',category);
-				Box.Application.stopAll(document.getElementById('notes'));
-				Box.Application.startAll(document.getElementById('notes'));
 			}
 		},
 		onclick:function(event,element,elementType){

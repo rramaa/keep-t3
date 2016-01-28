@@ -5,6 +5,8 @@
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
   <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -19,10 +21,6 @@
         </div>
 
 		<div data-module="list-categories">
-            <!--<button data-type="btn-category" data-cat-id="0">All</button>
-            <button data-type="btn-category" data-cat-id="1">Home</button>
-            <button data-type="btn-category" data-cat-id="2">Personal</button>
-            <button data-type="btn-category" data-cat-id="3">Work</button>-->
         </div>
 	</div>
 
@@ -36,90 +34,21 @@
         </div>
 
 		<div data-module="list-notes">
-            <!--<div data-type="note" data-note-id="0">
-                <span data-type="note-content">Content</span>
-                <textarea data-type="note-editing"></textarea>
-                <button data-type="btn-delete">Delete</button>
-                <button data-type="btn-checkbox">Checkbox</button>
-                <div class="dropdown" data-type="change-color">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Color
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#" data-color-id="1">Color 1</a></li>
-                    <li><a href="#" data-color-id="2">Color 2</a></li>
-                    <li><a href="#" data-color-id="3">Color 3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown" data-type="change-cat">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#" data-cat-id="1">Cat 1</a></li>
-                    <li><a href="#" data-cat-id="2">Cat 2</a></li>
-                    <li><a href="#" data-cat-id="3">Cat 3</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div data-type="note" data-note-id="1">
-                <span data-type="note-content">Content</span>
-                <textarea data-type="note-editing"></textarea>
-                <button data-type="btn-delete">Delete</button>
-                <button data-type="btn-checkbox">Checkbox</button>
-                <div class="dropdown" data-type="change-color">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Color
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#" data-color-id="1">Color 1</a></li>
-                    <li><a href="#" data-color-id="2">Color 2</a></li>
-                    <li><a href="#" data-color-id="3">Color 3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown" data-type="change-cat">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#" data-cat-id="1">Cat 1</a></li>
-                    <li><a href="#" data-cat-id="2">Cat 2</a></li>
-                    <li><a href="#" data-cat-id="3">Cat 3</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div data-type="note" data-note-id="2">
-                <span data-type="note-content">Content</span>
-                <textarea data-type="note-editing"></textarea>
-                <button data-type="btn-delete">Delete</button>
-                <button data-type="btn-checkbox">Checkbox</button>
-                <div class="dropdown" data-type="change-color">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Color
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#" data-color-id="1">Color 1</a></li>
-                    <li><a href="#" data-color-id="2">Color 2</a></li>
-                    <li><a href="#" data-color-id="3">Color 3</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown" data-type="change-cat">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Category
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#" data-cat-id="1">Cat 1</a></li>
-                    <li><a href="#" data-cat-id="2">Cat 2</a></li>
-                    <li><a href="#" data-cat-id="3">Cat 3</a></li>
-                    </ul>
-                </div>
-            </div>-->
         </div>
 	</div>
 </div>
 <script type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery-color.js"></script>
 <script type="text/javascript" src="dist/t3.js"></script>
 <script type="text/javascript" src="js/services/db.js"></script>
 <script type="text/javascript" src="js/services/utilities.js"></script>
-<script type="text/javascript" src="js/services/initializeDb.js"></script>
+<!-- <script type="text/javascript" src="js/services/initializeDb.js"></script> -->
+<script type="text/javascript" src="js/services/router.js"></script>
 <script type="text/javascript" src="js/modules/add-categories.js"></script>
 <script type="text/javascript" src="js/modules/list-categories.js"></script>
 <script type="text/javascript" src="js/modules/add-notes.js"></script>
 <script type="text/javascript" src="js/modules/list-notes.js"></script>
-<script type="text/javascript">Box.Application.init({debug:true});</script>
+<script type="text/javascript" src="js/script.js">
+</script>
 </body>
 </html>

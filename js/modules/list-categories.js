@@ -1,18 +1,17 @@
 Box.Application.addModule('list-categories',function(context){
 	'use strict';
-	var moduleElement,categories;
+	var moduleElement,categories,router;
 	return{
-		messages:['categoryAdded'],
+		messages:['categoryAdded',"ready"],
 		init:function(){
 			moduleElement=context.getElement();
 			var db=context.getService('db');
 			categories=db.getData('categories');
-			if(!categories){
-				console.log('No categories');
-				var temp=context.getService('initializeDb');
-				categories=temp.initializeCategories();
-				db.Data('categories',categories);
-			}
+			// if(!categories){
+			// 	categories=db.initializeCategories();
+			// }
+			router=context.getService('router');
+			//router.changeTo(1);
 			this.populateCategoryList();
 		},
 		createCategoryButton:function(category){
@@ -23,7 +22,10 @@ Box.Application.addModule('list-categories',function(context){
 			return button;
 		},
 		updateCategoryList:function(category){
-			moduleElement.appendChild(this.createCategoryButton(category));
+			var btn=this.createCategoryButton(category);
+			moduleElement.appendChild(btn);
+			$(btn).hide();
+			$(btn).fadeIn();
 		},
 		populateCategoryList:function(){
 			for(var key in categories.data){
@@ -34,13 +36,18 @@ Box.Application.addModule('list-categories',function(context){
 			if(elementType=="btn-category"){
 				var id=element.getAttribute("data-cat-id");
 				context.broadcast("currentCategoryChanged",id);
+				console.log(id);
+				router.changeTo(id);
 			}
 		},
 		onmessage:function(name,data){
-			if(name='categoryAdded'){
+			if(name=='categoryAdded'){
 				categories.count++;
 				categories.data.push(data);
 				this.updateCategoryList(data);
+			}
+			else if(name=="ready"){
+				router.init();
 			}
 		},
 		destroy:function(){

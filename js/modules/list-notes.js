@@ -7,24 +7,19 @@ Box.Application.addModule('list-notes',function(context){
 			moduleElement=context.getElement();
 			db=context.getService('db');
 			notes=db.getData('notes');
-			if(!notes){
-				var temp=context.getService('initializeDb');
-				notes=temp.initializeNotes();
-				db.setData('notes',notes);
-			}
+			// if(!notes){
+			// 	notes=db.initializeNotes();
+			// }
 			utilities=context.getService('utilities');
-			selectedCategory=1;
-			this.populateNotes();
+			selectedCategory=0;
+			context.broadcast("ready");
+			// this.populateNotes();
 			//this.updateCategoryDropdown();
 		},
 		createNoteTemplate:function(){
 			var noteTemplate=document.createDocumentFragment();
 			var textarea=utilities.createElement('textarea',null,null,null,'note-editing');
 			noteTemplate.appendChild(textarea);
-			var button=utilities.createElement('button','Delete',null,null,'btn-delete');
-			noteTemplate.appendChild(button);
-			var button=utilities.createElement('button','Checkbox',null,null,'btn-checkbox');
-			noteTemplate.appendChild(button);
 			return noteTemplate;
 		},
 		createNote:function(note){
@@ -35,16 +30,33 @@ Box.Application.addModule('list-notes',function(context){
 			var span=utilities.createElement('span',content,null,null,'note-content');
 			div.appendChild(span);
 			div.appendChild(this.createNoteTemplate());
-			var catDropdown=utilities.createCategoryDropdown(note.category);
-			div.appendChild(catDropdown);
-			var colorDropdown=utilities.createColorDropdown(note.color);
-			div.appendChild(colorDropdown[0]);
+			var encDiv=utilities.createElement('div',null,null,'all-buttons');
+
+			var span=utilities.createElement('i',null,null,"fa fa-trash-o");
+			var button=utilities.createElement('button',null,null,null,'btn-delete');
+			button.appendChild(span);
+			encDiv.appendChild(button);
+			var span=utilities.createElement('i',null,null,"fa fa-check-square-o");
+			var button=utilities.createElement('button',null,null,null,'btn-checkbox');
+			button.appendChild(span);
+			encDiv.appendChild(button);
+			// var catDropdown=utilities.createCategoryDropdown(note.category);
+			var catDropdown=utilities.createDropdownElement(note.category,"cat");
+			encDiv.appendChild(catDropdown);
+			// var colorDropdown=utilities.createColorDropdown(note.color);
+			var colorDropdown=utilities.createDropdownElement(note.color,"color");
+			encDiv.appendChild(colorDropdown[0]);
+			div.appendChild(encDiv);
 			div.style.backgroundColor=colorDropdown[1];
 			frag.appendChild(div);
 			return frag;
 		},
 		addNoteToList:function(note){
-			moduleElement.appendChild(this.createNote(note));
+			var node=this.createNote(note);
+			moduleElement.appendChild(node);
+			// console.log(node);
+			$(moduleElement.lastChild).hide();
+			$(moduleElement.lastChild).fadeIn();
 		},
 		clearModuleChildren:function(){
 			while(moduleElement.hasChildNodes()){
@@ -52,13 +64,17 @@ Box.Application.addModule('list-notes',function(context){
 			}
 		},
 		populateNotes:function(){
-			this.clearModuleChildren();
-			for(var key in notes.data){
-				if(notes.data[key])
-				if(notes.data[key].category==selectedCategory || selectedCategory==1){
-					this.addNoteToList(notes.data[key]);
+			var obj=this;
+			$(moduleElement).fadeOut("fast",function(){
+				obj.clearModuleChildren();
+				for(var key in notes.data){
+					if(notes.data[key])
+					if(notes.data[key].category==selectedCategory || selectedCategory==1){
+						obj.addNoteToList(notes.data[key]);
+					}
 				}
-			}
+			});
+			$(moduleElement).fadeIn("slow");
 		},
 		updateCategoryDropdown:function(category){
 			var catDropdowns=moduleElement.querySelectorAll('[data-type="change-cat"]');
@@ -66,9 +82,8 @@ Box.Application.addModule('list-notes',function(context){
 				if(key!='length' && key!='item'){
 					var ul=catDropdowns[key].querySelector('[class="dropdown-menu"]');
 					var li=utilities.createElement('li');
-					var a=utilities.createElement('a',category.name);
+					var a=utilities.createElement('a',category.name,null,null,category.id);
 					a.setAttribute("href","#");
-					a.setAttribute("data-cat-id",category.id);
 					li.appendChild(a);
 					ul.appendChild(li);
 					console.log(ul);
@@ -76,7 +91,10 @@ Box.Application.addModule('list-notes',function(context){
 			}
 		},
 		removeNoteFromList:function(id){
-			moduleElement.removeChild(moduleElement.querySelector('[data-note-id="'+id+'"]'));
+			var node=moduleElement.querySelector('[data-note-id="'+id+'"]');
+			$(node).animate({height:"0px",opacity:"0"},1000,function(){
+				moduleElement.removeChild(node);
+			});
 		},
 		deleteNote:function(id){
 			delete notes.data[id-1];
@@ -114,7 +132,8 @@ Box.Application.addModule('list-notes',function(context){
 			notes.data[noteId-1].color=colorId;
 			var color=utilities.getColor(colorId);
 			console.log(notes);
-			moduleElement.querySelector('[data-note-id="'+noteId+'"]').style.backgroundColor="#"+color;
+			// moduleElement.querySelector('[data-note-id="'+noteId+'"]').style.backgroundColor="#"+color;
+			$(moduleElement.querySelector('[data-note-id="'+noteId+'"]')).animate({backgroundColor:"#"+color});
 			db.setData('notes',notes);
 		},
 		format:function(note){
@@ -130,9 +149,9 @@ Box.Application.addModule('list-notes',function(context){
 			var checked="",unchecked="";
 			for(var key in data){
 				if(note.checkboxData[key])
-					checked+="<input type=checkbox checked data-type=btn-checkbox-flip id="+key+">"+data[key]+"<br>";
+					checked+="<input type=checkbox checked data-type=btn-checkbox-flip id="+key+"><span class=checked>"+data[key]+"</span><br>";
 				else
-					unchecked+="<input type=checkbox data-type=btn-checkbox-flip id="+key+">"+data[key]+"<br>";
+					unchecked+="<input type=checkbox data-type=btn-checkbox-flip id="+key+"><span class=unchecked>"+data[key]+"</span><br>";
 			}
 			if(checked=="")
 				return unchecked;
@@ -178,11 +197,11 @@ Box.Application.addModule('list-notes',function(context){
 		},
 		onclick:function(event,element,elementType){
 			if(elementType=="btn-delete"){
-				var id=element.parentNode.getAttribute("data-note-id");
+				var id=element.parentNode.parentNode.getAttribute("data-note-id");
 				this.deleteNote(id);
 			}
 			else if(elementType=="btn-checkbox"){
-				var id=element.parentNode.getAttribute("data-note-id");
+				var id=element.parentNode.parentNode.getAttribute("data-note-id");
 				this.invertCheckboxStatus(id);
 			}
 			else if(elementType=="btn-checkbox-flip"){
@@ -194,10 +213,10 @@ Box.Application.addModule('list-notes',function(context){
 				var parent=element.parentNode.parentNode.parentNode;
 				if(parent.getAttribute("data-type")=="change-cat"){
 					if(elementType!=1)
-					this.changeCategory(parent.parentNode.getAttribute("data-note-id"),elementType);
+						this.changeCategory(parent.parentNode.parentNode.getAttribute("data-note-id"),elementType);
 				}
 				else if(parent.getAttribute("data-type")=="change-color"){
-					this.changeColor(parent.parentNode.getAttribute("data-note-id"),elementType);
+					this.changeColor(parent.parentNode.parentNode.getAttribute("data-note-id"),elementType);
 				}
 			}
 		},
@@ -206,6 +225,7 @@ Box.Application.addModule('list-notes',function(context){
 			node.setAttribute("class","editing");
 			var textarea=node.querySelector('[data-type="note-editing"]');
 			textarea.value=utilities.parseAsHTML(notes.data[noteId-1].content);
+			textarea.setAttribute("rows",(textarea.value.split("\n").length>3)?3:textarea.value.split("\n").length);
 			textarea.select();
 			textarea.focus();
 		},

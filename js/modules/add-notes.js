@@ -16,9 +16,7 @@ Box.Application.addModule('add-notes',function(context){
 			db=context.getService('db');
 			notes=db.getData('notes');
 			if(!notes){
-				var temp=context.getService('initializeDb');
-				notes=temp.initializeNotes();
-				db.setData('notes',notes);
+				notes=db.initializeNotes();
 			}
 			utilities=context.getService('utilities');
 			selectedCategory=1;
