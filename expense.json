@@ -1,0 +1,27 @@
+{
+  "Data": [
+    {
+      "id": "ID Of Transaction",
+      "type": "Expense/Income",
+      "category": "Category of Transaction",
+      "value": "Value of Transaction",
+      "description": "Comments about transaction",
+      "timestamp": {
+        "date": "Date",
+        "month": "Month",
+        "year": "Year",
+        "time": "Time in 24 hour format"
+      }
+    }
+  ],
+  "count": "Number of Transactions"
+}
+{
+  "Data": [
+    {
+      "id": "ID Of Category",
+      "name": "Name of Category"
+    }
+  ],
+  "count": "Number of Categories"
+}

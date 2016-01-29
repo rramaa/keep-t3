@@ -16,7 +16,8 @@ Box.Application.addService('router',function(application){
 				}
 			}
 		},
-		changeTo:function(catId){
+		changeTo:function(catId,cat){
+			categories=cat;
 			catId--;
 			if(catId==0){
 				var state = { 'catId': 1};

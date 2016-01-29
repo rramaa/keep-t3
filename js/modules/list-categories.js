@@ -37,7 +37,7 @@ Box.Application.addModule('list-categories',function(context){
 				var id=element.getAttribute("data-cat-id");
 				context.broadcast("currentCategoryChanged",id);
 				console.log(id);
-				router.changeTo(id);
+				router.changeTo(id,categories);
 			}
 		},
 		onmessage:function(name,data){
