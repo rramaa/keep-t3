@@ -13,7 +13,7 @@ Box.Application.addService('db',function(application){
 		this.last=0;
 		this.data=[];
 	};
-	var categories,notes;
+	var categories,notes,utilities;
 	return{
 		getData:function(key){
 			var data=localStorage.getItem(key);
@@ -34,6 +34,8 @@ Box.Application.addService('db',function(application){
 			categories.count++;
 			categories.data.push(new Category(categories.count,"Work"));
 			this.setData("categories",categories);
+			utilities=application.getService('utilities');
+			utilities.updateCategory();
 			return categories;
 		},
 		initializeNotes:function(){

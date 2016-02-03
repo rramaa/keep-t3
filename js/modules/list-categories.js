@@ -1,12 +1,15 @@
 Box.Application.addModule('list-categories',function(context){
 	'use strict';
-	var moduleElement,categories,router;
+	var moduleElement,categories,router,utilities,list;
 	return{
 		messages:['categoryAdded',"ready"],
 		init:function(){
 			moduleElement=context.getElement();
 			var db=context.getService('db');
 			categories=db.getData('categories');
+			utilities=context.getService('utilities');
+			list=utilities.createElement('ul');
+			moduleElement.appendChild(list);
 			// if(!categories){
 			// 	categories=db.initializeCategories();
 			// }
@@ -15,17 +18,21 @@ Box.Application.addModule('list-categories',function(context){
 			this.populateCategoryList();
 		},
 		createCategoryButton:function(category){
-			var button=document.createElement('button');
-			button.setAttribute('data-type','btn-category');
-			button.setAttribute('data-cat-id',category.id);
-			button.innerHTML=category.name;
-			return button;
+			var li=utilities.createElement('li');
+			var i=utilities.createElement('i',null,null,'fa fa-dot-circle-o');
+			var span=document.createElement('span');
+			li.setAttribute('data-type','btn-category');
+			li.setAttribute('data-cat-id',category.id);
+			span.innerHTML=category.name;
+			li.appendChild(i);
+			li.appendChild(span);
+			return li;
 		},
 		updateCategoryList:function(category){
-			var btn=this.createCategoryButton(category);
-			moduleElement.appendChild(btn);
-			$(btn).hide();
-			$(btn).fadeIn();
+			var listElem=this.createCategoryButton(category);
+			list.appendChild(listElem);
+			$(listElem).hide();
+			$(listElem).fadeIn();
 		},
 		populateCategoryList:function(){
 			for(var key in categories.data){

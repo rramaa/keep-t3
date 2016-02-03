@@ -35,6 +35,12 @@
 		display: inline-block;
 	}
 }
+#newNote,#newCategory{
+	background-color: transparent;
+}
+#newNote i,#newCategory i{
+	font-size: 35px;
+}
 #categories{
 	padding: 5px;
 }
@@ -115,10 +121,10 @@ button:focus{
 }
 div.all-buttons button{
 	width:10%;
-	background-color: #337AB7;
+	//background-color: #337AB7;
 	color: white;
 	border-radius: 5px;
-	opacity: 0.2;
+	opacity: 0;
 }
 div.all-buttons button[data-type="btn-delete"]{
 	background-color: #E65D5D;
@@ -136,13 +142,8 @@ div[data-type="note"] div:nth-child(0){
 	display: inline-block;
 	padding: 0px;
 }
-div.all-buttons div button{
-	width:100%;
-	font-size: 10px;
-	//display: inline-block;
-}
 .dropdown{
-	width:30%;
+	width:auto;
 }
 div[data-type="change-color"] ul li a{
 	height: 20px;
@@ -157,4 +158,39 @@ span.unchecked{
 }
 span.checked, span.unchecked{
 	margin-left: 5px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+	width: auto !important;
+	font-size: 10px;
+    background: #383636;
+    color: #fff;
+    border: none;
+    border-radius: 0px;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #777070;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #777070;
+    box-shadow: none;
+}
+div[data-module="list-categories"] ul{
+	list-style-type: none;
+    padding: 10px;
+}
+div[data-module="list-categories"] ul li{
+	padding: 10px;
+    background-color: transparent;
+    cursor: pointer;
+}
+div[data-module="list-categories"] ul li:hover{
+    background-color: #E4E4E4;
+}
+div[data-module="list-categories"] ul li span{
+	padding: 5px;
 }
