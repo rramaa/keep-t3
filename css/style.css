@@ -1,0 +1,196 @@
+@media screen and (min-width:850px){
+	#categories{
+		width: 20%;
+		float: left;
+	}
+	#notes{
+		width :75%;
+		margin-left: 22%;
+		border-left:1px solid; 
+	}
+	#notes div[data-module="list-notes"] div[data-type="note"]{
+		width: 48%;
+	}
+	button[data-type="btn-category"]{
+		display: block;
+	}
+	input[type="text"]{
+		width:60%;
+	}
+}
+@media screen and (max-width:849px){
+	#categories{
+		width: 100%;
+		float: none;
+	}
+	#notes{
+		width :100%;
+		margin-left: 0px;
+		border-top:1px solid; 
+	}
+	#notes div[data-module="list-notes"] div[data-type="note"]{
+		width: 100%;
+	}
+	button[data-type="btn-category"]{
+		display: inline-block;
+	}
+}
+#newNote,#newCategory{
+	background-color: transparent;
+}
+#newNote i,#newCategory i{
+	font-size: 35px;
+}
+#categories{
+	padding: 5px;
+}
+#notes{
+	padding: 5px;
+	display: table;
+}
+#mod-add-notes-1{
+	position: relative;
+}
+#mod-add-notes-1 button{
+	position: absolute;
+	bottom:5px;
+}
+body{
+	font-family: Verdana;
+	background-color: #F3F3F3;
+}
+#notes div[data-module="add-notes"]{
+	margin-bottom: 2px;
+}
+#notes div[data-module="list-notes"] div[data-type="note"]{
+	display: table-cell;
+	box-sizing:border-box;
+	//width:48%;
+	float: left;
+	margin: 1%;
+	box-shadow: 1px 1px 5px black;
+	padding: 5px;
+	height: 120px;
+	position: relative;
+}
+textarea{
+	resize:none;
+}
+input[type="text"],textarea{
+	border: none;
+	border-bottom:1px solid #D0D0FF;  
+}
+input[type="text"]:focus,textarea:focus{
+	border: none;
+	border-bottom:1px solid blue;
+	outline-width: 0;
+}
+span[data-type="note-content"]{
+	display: block;
+	height: 60%;
+    overflow-y: auto;
+}
+textarea[data-type="note-editing"]{
+	display: none;
+}
+.editing textarea[data-type="note-editing"]{
+	display: block;
+	margin-bottom: 5px;
+	width: 99%;
+}
+.editing span[data-type="note-content"]{
+	display: none;
+}
+button{
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	margin:1px;
+}
+.all-buttons button,.all-buttons div{
+	display: inline-block;
+}
+button:focus{
+	outline-width: 0;
+}
+.all-buttons{
+	position: absolute;
+	bottom: 5px;
+	left:5px;
+	width:100%;
+}
+div.all-buttons button{
+	width:10%;
+	//background-color: #337AB7;
+	color: white;
+	border-radius: 5px;
+	opacity: 0;
+}
+div.all-buttons button[data-type="btn-delete"]{
+	background-color: #E65D5D;
+	/*opacity: 0.3;*/
+}
+div[data-type="note"]:hover>div.all-buttons button{
+	opacity: 1;
+}
+div.all-buttons button[data-type="btn-checkbox"]{
+	background-color: #383636;
+	/*opacity: 0.3;*/
+}
+div[data-type="note"] div:nth-child(0){
+	width:24%;
+	display: inline-block;
+	padding: 0px;
+}
+.dropdown{
+	width:auto;
+}
+div[data-type="change-color"] ul li a{
+	height: 20px;
+	border-bottom: 1px solid black;
+}
+span.checked{
+	text-decoration: line-through;
+	opacity: 0.6;
+}
+span.unchecked{
+	font-weight: bold;
+}
+span.checked, span.unchecked{
+	margin-left: 5px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
+
+.btn-primary {
+	width: auto !important;
+	font-size: 10px;
+    background: #383636;
+    color: #fff;
+    border: none;
+    border-radius: 0px;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #777070;
+}
+ 
+.btn-primary:active, .btn-primary.active {
+    background: #777070;
+    box-shadow: none;
+}
+div[data-module="list-categories"] ul{
+	list-style-type: none;
+    padding: 10px;
+}
+div[data-module="list-categories"] ul li{
+	padding: 10px;
+    background-color: transparent;
+    cursor: pointer;
+}
+div[data-module="list-categories"] ul li:hover{
+    background-color: #E4E4E4;
+}
+div[data-module="list-categories"] ul li span{
+	padding: 5px;
+}

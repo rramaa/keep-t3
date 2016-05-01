@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Keep</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
+  <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<body>
+<div id="main">
+
+	<div id="categories">
+		<span>Categories</span><br>
+		<div data-module="add-categories">
+            <input type="text" id="category" data-type="input-category" placeholder="Insert new Category">
+    		<button class="add" data-type="btn-add-category" id="newCategory" title="Add Category"><i class="fa fa-pencil-square-o"></i></button>
+        </div>
+
+		<div data-module="list-categories">
+        </div>
+	</div>
+
+
+
+	<div id="notes">
+		<span>Notes</span><br>
+		<div data-module="add-notes">
+            <textarea id="content" data-type="input-note" placeholder="Add your note here"></textarea>
+            <button class="add" data-type="btn-add-note" id="newNote" title="Add Note"><i class="fa fa-pencil-square-o"></i></button><br>      
+        </div>
+
+		<div data-module="list-notes">
+        </div>
+	</div>
+</div>
+<script type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery-color.js"></script>
+<script type="text/javascript" src="dist/t3.js"></script>
+<script type="text/javascript" src="js/services/db.js"></script>
+<script type="text/javascript" src="js/services/utilities.js"></script>
+<!-- <script type="text/javascript" src="js/services/initializeDb.js"></script> -->
+<script type="text/javascript" src="js/services/router.js"></script>
+<script type="text/javascript" src="js/modules/add-categories.js"></script>
+<script type="text/javascript" src="js/modules/list-categories.js"></script>
+<script type="text/javascript" src="js/modules/add-notes.js"></script>
+<script type="text/javascript" src="js/modules/list-notes.js"></script>
+<script type="text/javascript" src="js/script.js">
+</script>
+</body>
+</html>
