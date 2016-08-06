@@ -18,6 +18,8 @@ Box.Application.addModule('list-categories',function(context){
 			this.populateCategoryList();
 		},
 		createCategoryButton:function(category){
+			var a = utilities.createElement('a');
+			a.setAttribute('href', "#"+category.name.toLowerCase());
 			var li=utilities.createElement('li');
 			var i=utilities.createElement('i',null,null,'fa fa-dot-circle-o');
 			var span=document.createElement('span');
@@ -26,7 +28,8 @@ Box.Application.addModule('list-categories',function(context){
 			span.innerHTML=category.name;
 			li.appendChild(i);
 			li.appendChild(span);
-			return li;
+			a.appendChild(li);
+			return a;
 		},
 		updateCategoryList:function(category){
 			var listElem=this.createCategoryButton(category);
@@ -43,8 +46,8 @@ Box.Application.addModule('list-categories',function(context){
 			if(elementType=="btn-category"){
 				var id=element.getAttribute("data-cat-id");
 				context.broadcast("currentCategoryChanged",id);
-				console.log(id);
-				router.changeTo(id,categories);
+				// console.log(id);
+				// router.changeTo(id,categories);
 			}
 		},
 		onmessage:function(name,data){
@@ -54,7 +57,7 @@ Box.Application.addModule('list-categories',function(context){
 				this.updateCategoryList(data);
 			}
 			else if(name=="ready"){
-				router.init();
+				router.start();
 			}
 		},
 		destroy:function(){

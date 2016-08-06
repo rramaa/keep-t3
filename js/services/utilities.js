@@ -21,7 +21,7 @@ Box.Application.addService('utilities',function(application){
 			return text.charAt(0).toUpperCase() + text.slice(1);
 		},
 		changeUrl:function(URL){
-			return URL.toLowerCase().replace(" ","-");
+			return "#"+URL.toLowerCase().replace(" ","-");
 		},
 		cleanUp:function(content){
 			return this.parseAsText(content.trim());
@@ -40,6 +40,20 @@ Box.Application.addService('utilities',function(application){
 		},
 		updateCategory:function(){
 			categories=db.getData('categories');
+		},
+		getCategoryFromHash: function(){
+			return location.hash.substring(1);
+		},
+		getCategoryIdBasedOnHash: function(hash){
+			if(hash=="" || hash=="unorganised"){
+				return 1;
+			}
+			for(var key in categories.data){
+				if(hash.toLowerCase()==categories.data[key].name.toLowerCase()){
+					return categories.data[key].id;
+				}
+			}
+			return false;
 		},
 		createElement:function(type,innerHTML,id,Class,dataType,dataNoteId){
 			var element=document.createElement(type);
