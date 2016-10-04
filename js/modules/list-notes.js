@@ -1,6 +1,6 @@
 Box.Application.addModule('list-notes',function(context){
 	'use strict';
-	var moduleElement,db,notes,selectedCategory,utilities;
+	var moduleElement,db,notes,selectedCategory,utilities,timer;
 	return {
 		messages:["currentCategoryChanged","newNoteAdded","categoryAdded"],
 		init:function(){
@@ -79,14 +79,13 @@ Box.Application.addModule('list-notes',function(context){
 		updateCategoryDropdown:function(category){
 			var catDropdowns=moduleElement.querySelectorAll('[data-type="change-cat"]');
 			for(var key in catDropdowns){
-				if(key!='length' && key!='item'){
+				if(key!='length' && key!='item' && key!='keys'){
 					var ul=catDropdowns[key].querySelector('[class="dropdown-menu"]');
 					var li=utilities.createElement('li');
 					var a=utilities.createElement('a',category.name,null,null,category.id);
 					a.setAttribute("href","#");
 					li.appendChild(a);
 					ul.appendChild(li);
-					console.log(ul);
 				}
 			}
 		},
@@ -236,6 +235,7 @@ Box.Application.addModule('list-notes',function(context){
 		},
 		quitEditing:function(noteId){
 			var node=moduleElement.querySelector('[data-note-id="'+noteId+'"]');
+			console.log("ds");
 			node.setAttribute("class","");
 		},
 		stopEditing:function(noteId,value){
@@ -249,13 +249,16 @@ Box.Application.addModule('list-notes',function(context){
 		},
 		onkeydown:function(event,element,elementType){
 			if(elementType=="note-editing"){
-				if(event.keyCode==13 && !event.shiftKey){
-					var value=element.value;
-					this.stopEditing(element.parentNode.getAttribute("data-note-id"),value);
-					event.preventDefault();
-				}
-				else if(event.keyCode==27){
-					this.quitEditing(element.parentNode.getAttribute("data-note-id"));
+				if(!utilities.checkMobile()){
+					if(event.keyCode==13 && !event.shiftKey){
+						var value=element.value;
+						this.stopEditing(element.parentNode.getAttribute("data-note-id"),value);
+						event.preventDefault();
+					}
+					else if(event.keyCode==27){
+						this.startEditing(element.parentNode.getAttribute("data-note-id"));
+						this.quitEditing(element.parentNode.getAttribute("data-note-id"));
+					}
 				}
 			}
 		},
@@ -264,6 +267,23 @@ Box.Application.addModule('list-notes',function(context){
 				var value=element.value;
 				this.stopEditing(element.parentNode.getAttribute("data-note-id"),value);
 				//event.preventDefault();
+			}
+		},
+		onmousedown:function(event,element,elementType){
+			if(elementType=='note-content'){
+				if(utilities.checkMobile()){
+					var obj=this;
+					timer=setTimeout(function(){
+						obj.startEditing(element.parentNode.getAttribute("data-note-id"));
+					},1000);
+				}
+			}
+		},
+		onmouseup:function(event,element,elementType){
+			if(elementType=='note-content'){
+				if(utilities.checkMobile()){
+					clearTimeout(timer);
+				}
 			}
 		},
 		destroy:function(){
