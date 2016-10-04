@@ -79,7 +79,7 @@ Box.Application.addModule('list-notes',function(context){
 		updateCategoryDropdown:function(category){
 			var catDropdowns=moduleElement.querySelectorAll('[data-type="change-cat"]');
 			for(var key in catDropdowns){
-				if(catDropdowns[key]){
+				if(catDropdowns[key] && typeof catDropdowns[key].querySelector == "function"){
 					var ul=catDropdowns[key].querySelector('[class="dropdown-menu"]');
 					var li=utilities.createElement('li');
 					var a=utilities.createElement('a',category.name,null,null,category.id);
