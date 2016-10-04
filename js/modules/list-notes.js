@@ -209,6 +209,7 @@ Box.Application.addModule('list-notes',function(context){
 			}
 			else if(parseInt(elementType))
 			{
+				event.preventDefault();
 				var parent=element.parentNode.parentNode.parentNode;
 				if(parent.getAttribute("data-type")=="change-cat"){
 					if(elementType!=1)

@@ -2,19 +2,12 @@ Box.Application.addService('router',function(application){
 	'use strict';
 	var categories,utilities;
 	return {
-		init:function(){
+		start:function(){
 			utilities=application.getService('utilities');
 			categories=application.getService('db').getData('categories');
-			var cat=location.href.split("/")[3];
-			cat=cat.split("#")[0];
-			if(cat=="" || cat=="unorganised"){
-				application.broadcast("currentCategoryChanged",1);
-			}
-			for(var key in categories.data){
-				if(cat.toLowerCase()==utilities.changeUrl(categories.data[key].name)){
-					application.broadcast("currentCategoryChanged",categories.data[key].id);
-				}
-			}
+			var cat=utilities.getCategoryFromHash();
+			var id = utilities.getCategoryIdBasedOnHash(cat);
+			id && application.broadcast("currentCategoryChanged", id);
 		},
 		changeTo:function(catId,cat){
 			categories=cat;
@@ -22,7 +15,7 @@ Box.Application.addService('router',function(application){
 			if(catId==0){
 				var state = { 'catId': 1};
 				var title = 'All';
-				var url = 'unorganised';
+				var url = '#unorganised';
 				history.pushState(state, title, url);
 			}
 			else{

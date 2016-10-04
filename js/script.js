@@ -1,9 +1,8 @@
 
 Box.Application.init({debug:true});
-window.onpopstate=function(e){
-    if(e.state){
-        console.log(e.state.catId);
-        document.querySelector('[data-module="list-categories"]').querySelector('[data-cat-id="'+(e.state.catId+1)+'"]').click();
-        e.preventDefault();
-    }
-};
+$(window).on('hashchange', function(){
+	var utilities = Box.Application.getService('utilities');
+	var cat = utilities.getCategoryFromHash();
+	var id = utilities.getCategoryIdBasedOnHash(cat);
+	Box.Application.broadcast("currentCategoryChanged", id);
+})
