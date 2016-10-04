@@ -17,6 +17,21 @@
 	input[type="text"]{
 		width:60%;
 	}
+	div[data-module="list-categories"] ul{
+		list-style-type: none;
+	    padding: 10px;
+	}
+	div[data-module="list-categories"] ul li{
+		padding: 10px;
+	    background-color: transparent;
+	    cursor: pointer;
+	}
+	div[data-module="list-categories"] ul li:hover{
+	    background-color: #E4E4E4;
+	}
+	div[data-module="list-categories"] ul li span{
+		padding: 5px;
+	}
 }
 @media screen and (max-width:849px){
 	#categories{
@@ -33,6 +48,23 @@
 	}
 	button[data-type="btn-category"]{
 		display: inline-block;
+	}
+	div[data-module="list-categories"] ul{
+		list-style-type: none;
+	    padding: 10px;
+	    margin-bottom: 40px;
+	}
+	div[data-module="list-categories"] ul li{
+		padding: 10px;
+	    background-color: transparent;
+	    cursor: pointer;
+	    float: left;
+	}
+	div[data-module="list-categories"] ul li:hover{
+	    background-color: #E4E4E4;
+	}
+	div[data-module="list-categories"] ul li span{
+		padding: 5px;
 	}
 }
 #newNote,#newCategory{
@@ -178,19 +210,4 @@ span.checked, span.unchecked{
 .btn-primary:active, .btn-primary.active {
     background: #777070;
     box-shadow: none;
-}
-div[data-module="list-categories"] ul{
-	list-style-type: none;
-    padding: 10px;
-}
-div[data-module="list-categories"] ul li{
-	padding: 10px;
-    background-color: transparent;
-    cursor: pointer;
-}
-div[data-module="list-categories"] ul li:hover{
-    background-color: #E4E4E4;
-}
-div[data-module="list-categories"] ul li span{
-	padding: 5px;
 }
