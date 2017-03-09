@@ -1,6 +1,6 @@
 # keep-t3 
  
-A google keep like application.
+A google keep like applica
  
 Requires HTML5 support.
 
